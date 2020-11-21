@@ -244,14 +244,13 @@ Heroku is linked to application codebase on github repo https://github.com/mkhul
 ![alt text](https://user-images.githubusercontent.com/16665636/99882855-c635b300-2c3c-11eb-9563-57802a8dedbe.png)
 
 
-## If automated tests fail deploymentbalso fails
+## If automated tests fail deployment fails
 
 ![alt text](https://user-images.githubusercontent.com/16665636/99882723-0d6f7400-2c3c-11eb-80fe-4ce194f3dfae.png)
 
 
 ## If automated tests pass deployment also passes
 
-![alt text](https://user-images.githubusercontent.com/16665636/98450839-90cb9880-2159-11eb-91fd-a6eac6b064dd.png)
 
 ## Our docker image is also updated if our test passes
 
