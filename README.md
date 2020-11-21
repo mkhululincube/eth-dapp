@@ -1,14 +1,8 @@
-## Citizen Dapp -  Powered by Ethereum
+## Dapp -  Powered by Ethereum
 
-Demo Application link: (username: admin password: admin ): https://securrency-int.herokuapp.com/
+Demo Application link: https://jibrel.herokuapp.com/
 
-Dockerhub Repository link https://hub.docker.com/r/mkhululincube/citizen
-
-Demo video link: https://youtu.be/jH4O_ThxG_Y
-
-Invision Mockups link: https://mkhululincube15742.invisionapp.com/console/share/J31RMGLUVR
-
-Spec document https://docs.google.com/presentation/d/1YKTXaAWgpW-XF5aWvEJNHvg76w-H-PxlUxGpPpMKkfw/edit?usp=sharing
+Dockerhub Repository link https://hub.docker.com/r/mkhululincube/jibrel
 
 #### Tech Stack
 
@@ -36,7 +30,8 @@ Download and Install Node JS : https://nodejs.org/en/download/
 
 #### Clone repository
 
-    Git clone https://github.com/mkhululincube/sec.git
+    Git clone     Git clone https://github.com/mkhululincube/eth-dapp.git
+
 
 #### Extract the downloaded file using any zipping tool
 
@@ -55,7 +50,7 @@ Start the server
 
 ### Alternative docker setup if you prefer to run the application on docker
 
-#### Visit for docker setup or  https://hub.docker.com/r/mkhululincube/citizen
+#### Visit for docker setup or  https://hub.docker.com/r/mkhululincube/jibrel
 
 ### How to use the dapp application
 
@@ -71,6 +66,13 @@ Click on the Metamask logo. Switch to Ropsten Test Network, read and agree to th
 Visit https://faucet.metamask.io/ to get free tokens
 
 ### !!! Happy testing !!! 😄
+
+
+Visit https://github.com/mkhululincube/mongod-blockchain-app-api- and start the API
+
+Once the API is running
+
+Visit https://jibrel.herokuapp.com/ and use the credentials below
 
 
 ___ Username ___ : admin
@@ -89,18 +91,27 @@ If username and password is correct token is stored in localstorage, alternative
 Action is also fired/initiated to store authentication state is global storage.
 
 ```javascript
-   const onSubmit = data => {
-    dispatch(AdminLoggedIn(data))
-     localStorage.setItem('citizenMicroFrontend-token', JSON.stringify({
+    const onSubmit = data => {
+    axios.post(`${url}/auth/login`, data)
+    .then(response => {
+    dispatch(AdminLoggedIn(response.data))
+
+     localStorage.setItem('admin-token', JSON.stringify({
        loggedIn: true,
-       token: data,
-       username: data.username
+       token: response.token,
+       username: response.userId
      }));
+     //console.log("jibrel data",response.data.userId);
+
      props.history.push('/home')
-    } 
+     })
+      .catch(error => {
+       throw(error);
+       });
+       }
 ```
 
-![alt text](https://github.com/mkhululincube/sec/blob/main/screenshots/login.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99882611-380cfd00-2c3b-11eb-88ce-f2866196e56e.png)
 
 
 ### Home page
@@ -111,14 +122,14 @@ Action is also fired/initiated to store authentication state is global storage.
 
 ##### If metamask is not set
 
-![alt text](https://github.com/mkhululincube/sec/blob/main/screenshots/noMetamaskAddCitizen.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99883081-5b857700-2c3e-11eb-92a1-fbaf24db2824.png)
 
 
 ##### If metamask is set
 
-![alt text](https://github.com/mkhululincube/sec/blob/main/screenshots/home.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99883066-38f35e00-2c3e-11eb-8770-ff4373a93a9d.png)
 
-### Add Citizen
+### Add User
 
 #### Validation
 
@@ -177,14 +188,14 @@ Note the submission returns a promise therefore we have to async/await
 
 #### If account has no fund an error is caught and error is shown
 
-![alt text](https://github.com/mkhululincube/sec/blob/main/screenshots/notokens.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99883036-0ba6b000-2c3e-11eb-9b3a-8f7d2936aea6.png)
 
 #### If account has funds
 
-![alt text](https://github.com/mkhululincube/sec/blob/main/screenshots/sucess.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99882999-cc785f00-2c3d-11eb-9f46-3ceddf0f1e80.png")
 
 
-### Citizen list page
+### Users list page
 
 #### Protected Page (check login token in localstorage)
 
@@ -213,16 +224,11 @@ Check on the global store if metamask is set
 
 #### IF metamask is set
 
-![alt text](https://github.com/mkhululincube/sec/blob/main/screenshots/listCitizens.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99883241-8a501d00-2c3f-11eb-9879-fec05d9f164c.png)
 
 #### IF metamask is not set
 
-![alt text](https://github.com/mkhululincube/sec/blob/main/screenshots/noMetamaskCitizenList.png)
-
-
-### View citizen notes
-
-![alt text](https://github.com/mkhululincube/sec/blob/main/screenshots/notes.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99883253-9f2cb080-2c3f-11eb-8d90-d8eb50a1cb74.png)
 
 
 # DEVOPS 
@@ -231,20 +237,16 @@ Check on the global store if metamask is set
 
 Application hosted on heroku
 
-Heroku is linked to application codebase on github repo https://github.com/mkhululincube/sec/
+Heroku is linked to application codebase on github repo https://github.com/mkhululincube/eth-dapp/
 
 ## Automated deployment is setup on heroku 
 
-![alt text](https://user-images.githubusercontent.com/16665636/98450713-5a414e00-2158-11eb-868d-aedc0990325d.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99882855-c635b300-2c3c-11eb-9563-57802a8dedbe.png)
 
 
 ## If automated tests fail deploymentbalso fails
 
-![alt text](https://user-images.githubusercontent.com/16665636/98450775-008d5380-2159-11eb-8538-e65a4d92e8e0.png)
-
-## Email sent to registered account
-
-![alt text](https://user-images.githubusercontent.com/16665636/98458027-d8781180-21a5-11eb-95d5-817f47411efa.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99882723-0d6f7400-2c3c-11eb-80fe-4ce194f3dfae.png)
 
 
 ## If automated tests pass deployment also passes
@@ -253,7 +255,7 @@ Heroku is linked to application codebase on github repo https://github.com/mkhul
 
 ## Our docker image is also updated if our test passes
 
-![alt text](https://user-images.githubusercontent.com/16665636/98450886-046da580-215a-11eb-9da3-25b8042ea7d8.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99882903-2298d280-2c3d-11eb-96ea-5fed9c59ac7f.png)
 
 
 
@@ -261,25 +263,23 @@ Heroku is linked to application codebase on github repo https://github.com/mkhul
 
 ## Build Image from Dockerfile or pull image from dockerhub
 
-    docker pull mkhululincube/citizen
+    docker pull mkhululincube/jibrel
 
-![alt text](https://user-images.githubusercontent.com/16665636/98450968-ed7b8300-215a-11eb-8621-39d14288c428.png)
+![alt text](https://user-images.githubusercontent.com/16665636/99882973-87542d00-2c3d-11eb-963e-a140abe41a20.png)
 
 ## List images to see if the image is downloaded
 
     docker images
 
-![alt text](https://user-images.githubusercontent.com/16665636/98450997-4814df00-215b-11eb-8761-24c99e007785.png)
-
+ 
 ## Spin up the image to create a container and map the port
 
-    docker run --name citizen -p 4680:3000 -d mkhululi/citizen
+    docker run --name jibrel -p 4680:3000 -d mkhululi/jibrel
 
 ## List containers to see if the image is downloaded
 
     docker ps
     
-![alt text](https://user-images.githubusercontent.com/16665636/98451128-6e874a00-215c-11eb-944a-7b2b43b6ba7a.png)
     
 ## Get docker engine ip
 

@@ -96,7 +96,7 @@ return (
 {loading ? <Loading /> : null }
 {showForm ?
 <>
-<Divider>Add citizen details</Divider>
+<Divider>Add users details</Divider>
 
 {
   noAccount && <NoAccount />
@@ -153,9 +153,9 @@ sucessMessage ?
         setShowForm(true)
         setSucessMessage(false)
       }} type="primary" key="console">
-        Add more citizens
+        Add more users
       </Button>,
-     <Link to={`/citizens`}><Button key="buy">View citizens</Button></Link> ,
+     <Link to={`/citizens`}><Button key="buy">View users</Button></Link> ,
     ]}
   />
 :
